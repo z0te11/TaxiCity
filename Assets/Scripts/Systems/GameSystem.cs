@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class GameSystem : MonoBehaviour
 {
-    public static StaminaController staminaSystem;
+    public static StaminaController staminaCtrl;
+    public static MoneyController moneyCtrl;
+
     private void Awake()
     {
-        InitializeSystems();
+        InitializeControllers();
     }
 
     private void Start()
@@ -16,12 +18,14 @@ public class GameSystem : MonoBehaviour
 
     private void StartGame()
     {
-        if (staminaSystem != null) staminaSystem.StaminaPlayer = 100;
+        if (staminaCtrl != null) staminaCtrl.StaminaPlayer = 100;
+        if (moneyCtrl != null) moneyCtrl.MoneyPlayer = 10;
     }
 
-    private void InitializeSystems()
+    private void InitializeControllers()
     {
-        staminaSystem = new StaminaController();
+        staminaCtrl = new StaminaController();
+        moneyCtrl = new MoneyController();
     }
 
 }

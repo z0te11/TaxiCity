@@ -1,19 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WayPoint : MonoBehaviour
 {
     private Renderer _render;
 
-    private void Start()
+    private void Awake()
     {
         _render = GetComponent<Renderer>();
     }
 
-    public void SetShader(Shader newShader)
+    public void SetShader(Material newMaterial)
     {
-        _render.material.shader = newShader;
+        _render.material = newMaterial;
+    }
+
+    public void OnCollisionEnter(Collision other)
+    {
+        if (OrderSystem.instance.currnetOrder == null) return;
+        WaySystem.instance.NextWayRoad();
+        DestroyPoint();
+    }
+    
+    public void DestroyPoint()
+    {
+        Destroy(gameObject);
     }
 
 }
