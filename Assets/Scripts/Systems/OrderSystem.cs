@@ -24,6 +24,11 @@ public class OrderSystem : MonoBehaviour
         currnetOrder = _foundOrder;
         if (currnetOrder != null) WaySystem.instance.CreateWayRoad(currnetOrder.orderWay);
     }
+
+    public void FinishOrder()
+    {
+        currnetOrder = null;
+    }
 }
 
 

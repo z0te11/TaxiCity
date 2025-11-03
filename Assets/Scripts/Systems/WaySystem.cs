@@ -8,7 +8,7 @@ public class WaySystem : MonoBehaviour
     [SerializeField] private Material _neutralMaterial;
     [SerializeField] private Material _finishMaterial;
     private int _numberWay = 0;
-    private WayPosition _currentWayPos;
+    private List<int> _currentWayPos = new List<int>();
 
     public static WaySystem instance;
 
@@ -17,10 +17,11 @@ public class WaySystem : MonoBehaviour
         if (instance == null) instance = this;
     }
 
-    public void CreateWayRoad(WayPosition wayPos)
+    public void CreateWayRoad(List<int> wayPos)
     {
         _currentWayPos = wayPos;
-        CreateWayPoint(_currentWayPos.points[_numberWay], _startMaterial);
+        Vector3 wayFirstPos = BuildingSystem.instance.GetPositionBuilding(_currentWayPos[0]);
+        CreateWayPoint(wayFirstPos, _startMaterial);
     }
 
     private void CreateWayPoint(Vector3 pos, Material newMaterial)
@@ -32,9 +33,15 @@ public class WaySystem : MonoBehaviour
 
     public void NextWayRoad()
     {
+        if (_numberWay >= _currentWayPos.Count)
+        {
+            OrderSystem.instance.FinishOrder();
+            return;
+        }
+
         _numberWay++;
         var newMaterial = _startMaterial;
-        if (_numberWay < _currentWayPos.points.Count)
+        if (_numberWay < _currentWayPos.Count)
         {
             newMaterial = _neutralMaterial;
         }
@@ -42,12 +49,8 @@ public class WaySystem : MonoBehaviour
         {
             newMaterial = _finishMaterial;
         }
-        CreateWayPoint(_currentWayPos.points[_numberWay], newMaterial);
+        CreateWayPoint(BuildingSystem.instance.GetPositionBuilding(_currentWayPos[_numberWay]), newMaterial);
     }
 }
 
 
-public struct WayPosition
-{
-    public List<Vector3> points;
-}

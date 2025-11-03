@@ -16,3 +16,4 @@ MonoBehaviour:
   description: TestDesription3
   price: 300
   time: 90
+  orderWay: 050000000c000000

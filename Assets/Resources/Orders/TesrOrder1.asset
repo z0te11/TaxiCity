@@ -16,3 +16,4 @@ MonoBehaviour:
   description: TestDesription1
   price: 100
   time: 30
+  orderWay: 010000000200000003000000

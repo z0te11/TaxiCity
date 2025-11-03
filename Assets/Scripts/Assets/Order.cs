@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -7,5 +9,5 @@ public class Order : ScriptableObject
     public string description;
     public int price;
     public float time;
-    public WayPosition orderWay;
+    public List<int> orderWay;
 }

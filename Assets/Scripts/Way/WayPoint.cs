@@ -6,7 +6,7 @@ public class WayPoint : MonoBehaviour
 
     private void Awake()
     {
-        _render = GetComponent<Renderer>();
+        _render = GetComponentInChildren<Renderer>();
     }
 
     public void SetShader(Material newMaterial)
