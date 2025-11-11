@@ -8,6 +8,7 @@ public class CarPanel : MonoBehaviour
     [SerializeField] private Text _stageText;
     [SerializeField] private Text _staminaText;
     [SerializeField] private Text _moneyText;
+    [SerializeField] private Text _fuelText;
 
     private void OnEnable()
     {
@@ -15,6 +16,7 @@ public class CarPanel : MonoBehaviour
         CarMovement.OnSpeedChanged += ShowSpeedText;
         StaminaController.OnStaminaChanged += ShowStaminaText;
         MoneyController.OnMoneyChanged += ShowMoneyText;
+        FuelController.OnFuelChanged += ShowFuelText;
     }
 
     private void OnDisable()
@@ -23,6 +25,7 @@ public class CarPanel : MonoBehaviour
         CarMovement.OnSpeedChanged -= ShowSpeedText;
         StaminaController.OnStaminaChanged -= ShowStaminaText;
         MoneyController.OnMoneyChanged -= ShowMoneyText;
+        FuelController.OnFuelChanged -= ShowFuelText;
     }
 
     private void ShowSpeedText(float speed)
@@ -42,5 +45,10 @@ public class CarPanel : MonoBehaviour
     private void ShowMoneyText(int money)
     {
         _moneyText.text = "Money = " + money.ToString();
+    }
+
+    private void ShowFuelText(float fuel)
+    {
+        _fuelText.text = "Fuel = " + Math.Round(fuel, 2).ToString();
     }
 }

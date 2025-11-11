@@ -14,7 +14,7 @@ public class WayPoint : MonoBehaviour
         _render.material = newMaterial;
     }
 
-    public void OnCollisionEnter(Collision other)
+    public void OnTriggerEnter(Collider other)
     {
         if (OrderSystem.instance.currnetOrder == null) return;
         WaySystem.instance.NextWayRoad();

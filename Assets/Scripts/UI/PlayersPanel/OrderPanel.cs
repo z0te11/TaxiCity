@@ -9,6 +9,7 @@ public class OrderPanel : MonoBehaviour
     [SerializeField] private Text _timeText;
     [SerializeField] private Text _startOrderText;
     [SerializeField] private Text _finishOrderText;
+    [SerializeField] private GameObject _acceptButton;
     
 
     public void SetTextOrder(Order newOrder)
@@ -36,5 +37,6 @@ public class OrderPanel : MonoBehaviour
     public void AcceptOrder()
     {
         OrderSystem.instance.AcceptOrder();
+        Destroy(_acceptButton);
     }
 }

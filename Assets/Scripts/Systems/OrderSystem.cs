@@ -27,6 +27,7 @@ public class OrderSystem : MonoBehaviour
 
     public void FinishOrder()
     {
+        GameSystem.moneyCtrl.AddMoney(currnetOrder.price);
         currnetOrder = null;
     }
 }

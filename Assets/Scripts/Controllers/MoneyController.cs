@@ -8,10 +8,13 @@ public class MoneyController
 
     public int MoneyPlayer
     {
-        get {return _moneyPlayer;}
-        set {_moneyPlayer = value;
-        if (_moneyPlayer < 0) _moneyPlayer = 0;
-        OnMoneyChanged?.Invoke(_moneyPlayer);}
+        get { return _moneyPlayer; }
+        set
+        {
+            _moneyPlayer = value;
+            if (_moneyPlayer < 0) _moneyPlayer = 0;
+            OnMoneyChanged?.Invoke(_moneyPlayer);
+        }
     }
 
     public void AddMoney(int money)

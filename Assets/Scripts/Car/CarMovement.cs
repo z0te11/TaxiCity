@@ -18,6 +18,7 @@ public class CarMovement : MonoBehaviour, IMovementCar, ITransmission
     private int _stage;
     private int _maxStage = 5;
     private float _currentSpeed;
+    private bool _canMove = true;
 
     public int Stage
     {
@@ -55,6 +56,11 @@ public class CarMovement : MonoBehaviour, IMovementCar, ITransmission
         Stage = 1;
     }
 
+    public void CanPlayerMove(bool isCan)
+    {
+        _canMove = isCan;
+    }
+
     public void Move(Vector2 pos)
     {
         MoveForward(pos.y);
@@ -63,12 +69,12 @@ public class CarMovement : MonoBehaviour, IMovementCar, ITransmission
 
     public void MoveForward(float verticalInput)
     {
-        if (verticalInput > 0)
+        if (verticalInput > 0 && _canMove)
         {
             var newAccel = Utils.CalculateAcceleration(Stage, _acceleration, Speed);
             Speed = Mathf.Lerp(Speed, _maxSpeed, newAccel * Time.fixedDeltaTime);
         }
-        else if (verticalInput < 0)
+        else if (verticalInput < 0 && _canMove)
         {
             Speed = Mathf.Lerp(Speed, -_backMaxSpeed, _acceleration * Time.fixedDeltaTime);
         }
