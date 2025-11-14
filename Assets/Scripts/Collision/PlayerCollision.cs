@@ -10,7 +10,7 @@ public class PlayerCollision : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (_carMove == null) return;
-         _carMove.Speed /= 2;
+         _carMove.Speed = 0;
 
         if (collision.gameObject.GetComponent<Building>())
         {
