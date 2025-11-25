@@ -31,6 +31,6 @@ public class PlayerStamina : MonoBehaviour
 
     private void SpendStamina()
     {
-        GameSystem.staminaCtrl.RemoveStamina(_spendStForTick);
+        StaminaManager.Instance.RemoveStamina(_spendStForTick);
     }
 }

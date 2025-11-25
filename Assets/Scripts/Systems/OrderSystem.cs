@@ -16,6 +16,7 @@ public class OrderSystem : MonoBehaviour
         if (instance == null) instance = this;
     }
 
+
     public void FindNewOrder()
     {
         _foundOrder = _orders[UnityEngine.Random.Range(0, 2)];
@@ -31,7 +32,13 @@ public class OrderSystem : MonoBehaviour
 
     public void FinishOrder()
     {
-        GameSystem.moneyCtrl.AddMoney(currnetOrder.price);
+        MoneyManager.Instance.AddMoney(currnetOrder.price);
+        OnOrderFinished?.Invoke();
+        currnetOrder = null;
+    }
+
+    public void FailOrder()
+    {
         OnOrderFinished?.Invoke();
         currnetOrder = null;
     }

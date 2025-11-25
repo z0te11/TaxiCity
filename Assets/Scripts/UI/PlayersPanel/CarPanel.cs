@@ -12,20 +12,20 @@ public class CarPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        CarMovement.OnStageChanged += ShowStageText;
-        CarMovement.OnSpeedChanged += ShowSpeedText;
-        StaminaController.OnStaminaChanged += ShowStaminaText;
-        MoneyController.OnMoneyChanged += ShowMoneyText;
-        FuelController.OnFuelChanged += ShowFuelText;
+        CarPlayerMovement.OnStageChanged += ShowStageText;
+        CarPlayerMovement.OnSpeedChanged += ShowSpeedText;
+        StaminaManager.OnStaminaChanged += ShowStaminaText;
+        MoneyManager.OnMoneyChanged += ShowMoneyText;
+        FuelManager.OnFuelChanged += ShowFuelText;
     }
 
     private void OnDisable()
     {
-        CarMovement.OnStageChanged -= ShowStageText;
-        CarMovement.OnSpeedChanged -= ShowSpeedText;
-        StaminaController.OnStaminaChanged -= ShowStaminaText;
-        MoneyController.OnMoneyChanged -= ShowMoneyText;
-        FuelController.OnFuelChanged -= ShowFuelText;
+        CarPlayerMovement.OnStageChanged -= ShowStageText;
+        CarPlayerMovement.OnSpeedChanged -= ShowSpeedText;
+        StaminaManager.OnStaminaChanged -= ShowStaminaText;
+        MoneyManager.OnMoneyChanged -= ShowMoneyText;
+        FuelManager.OnFuelChanged -= ShowFuelText;
     }
 
     private void ShowSpeedText(float speed)
@@ -37,9 +37,9 @@ public class CarPanel : MonoBehaviour
     {
         _stageText.text = "Stage = " + stage.ToString();
     }
-    private void ShowStaminaText(int stamina)
+    private void ShowStaminaText(float stamina)
     {
-        _staminaText.text = "Stamina = " + stamina.ToString();
+        _staminaText.text = "Stamina = " + Math.Round(stamina, 2).ToString();
     }
 
     private void ShowMoneyText(int money)

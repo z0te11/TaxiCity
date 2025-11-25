@@ -4,24 +4,22 @@ public class PlayerFuel : MonoBehaviour
 {
     [SerializeField] private float _tickTimeFuel;
     [SerializeField] private float _fuelСonsumption;
+    [SerializeField] private CarPlayerMovement _carMove;
     private float _tickTime;
-    private CarMovement _carMove;
-
 
     private void Awake()
     {
-        _carMove = GetComponent<CarMovement>();
         _tickTime = _tickTimeFuel;
     }
 
     private void OnEnable()
     {
-        FuelController.OnFuelChanged += PlayerHaveFuel;
+        FuelManager.OnFuelChanged += PlayerHaveFuel;
     }
 
     private void OnDisable()
     {
-        FuelController.OnFuelChanged -= PlayerHaveFuel;
+        FuelManager.OnFuelChanged -= PlayerHaveFuel;
     }
 
     private void FixedUpdate()
@@ -30,7 +28,7 @@ public class PlayerFuel : MonoBehaviour
 
         if (_tickTime <= 0)
         {
-            GameSystem.fuelCtrl.SpendFuel(_carMove.Speed * _fuelСonsumption / 100);
+            FuelManager.Instance.SpendFuel(_carMove.Speed * _fuelСonsumption / 100);
             _tickTime = _tickTimeFuel;
         }
         else

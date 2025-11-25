@@ -2,11 +2,7 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    private CarMovement _carMove;
-    private void Awake()
-    {
-        _carMove = GetComponent<CarMovement>();
-    }
+    [SerializeField] private CarPlayerMovement _carMove;
     private void OnCollisionEnter(Collision collision)
     {
         if (_carMove == null) return;

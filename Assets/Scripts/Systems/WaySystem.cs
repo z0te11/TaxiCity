@@ -20,6 +20,7 @@ public class WaySystem : MonoBehaviour
 
     public void CreateWayRoad(List<int> wayPos)
     {
+        _numberWay = 0;
         _currentWayPos = wayPos;
         Vector3 wayFirstPos = BuildingSystem.instance.GetPositionBuilding(_currentWayPos[_numberWay]);
         CreateWayPoint(wayFirstPos, _startMaterial);

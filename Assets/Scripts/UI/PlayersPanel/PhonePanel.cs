@@ -22,7 +22,7 @@ public class PhonePanel : MonoBehaviour
     public void CreateNewOrderPanel(Order newOrder)
     {
         if (_currOrderPanel != null) Destroy(_currOrderPanel);
-        var newOrderPanel = Instantiate(_orderPanel, this.transform.position, Quaternion.identity, this.transform);
+        GameObject newOrderPanel = Instantiate(_orderPanel, this.transform.position, Quaternion.identity, this.transform);
         newOrderPanel.GetComponent<OrderPanel>().SetTextOrder(newOrder);
         _currOrderPanel = newOrderPanel;
     }
