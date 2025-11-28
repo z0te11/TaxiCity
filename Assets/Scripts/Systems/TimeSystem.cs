@@ -132,4 +132,15 @@ public class TimeSystem : MonoBehaviour
         return $"{currentTime.GetSeasonName()} {currentTime.day}, Year {currentTime.year} - {currentTime.hour:00}:{currentTime.minute:00}";
     }
 
+    public float GetNormalizedTime()
+    {
+    // Преобразуем часы и минуты в нормализованное значение [0, 1]
+    // 0.0f = 00:00 (полночь)
+    // 0.5f = 12:00 (полдень) 
+    // 1.0f = 24:00 (следующая полночь)
+    
+    float totalMinutes = (currentTime.hour * 60f) + currentTime.minute;
+    return totalMinutes / (24f * 60f);
+    }
+
 }

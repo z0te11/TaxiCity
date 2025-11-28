@@ -1,8 +1,7 @@
 using UnityEngine;
-
-interface ITransmission
+public interface ITransmission
 {
-    public void NextStage();
-
-    public void PreviousStage();
+    void NextStage();
+    void PreviousStage();
+    int Stage { get; set; }
 }
