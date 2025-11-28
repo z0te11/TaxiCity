@@ -56,4 +56,14 @@ public static class Utils
         return maxAcceleration;
     }
 
+    public static int CalculateNewStage(float speed)
+    {
+        if (speed > 100) return 5;
+        if (speed > 80) return 4;
+        if (speed > 60) return 3;
+        if (speed > 40) return 2;
+        if (speed > 20) return 1;
+        return 1;
+    }
+
 }

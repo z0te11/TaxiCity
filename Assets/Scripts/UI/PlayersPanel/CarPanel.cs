@@ -12,7 +12,7 @@ public class CarPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        CarPlayerMovement.OnStageChanged += ShowStageText;
+        CarTransmission.OnStageChanged += ShowStageText;
         CarPlayerMovement.OnSpeedChanged += ShowSpeedText;
         StaminaManager.OnStaminaChanged += ShowStaminaText;
         MoneyManager.OnMoneyChanged += ShowMoneyText;
@@ -21,7 +21,7 @@ public class CarPanel : MonoBehaviour
 
     private void OnDisable()
     {
-        CarPlayerMovement.OnStageChanged -= ShowStageText;
+        CarTransmission.OnStageChanged -= ShowStageText;
         CarPlayerMovement.OnSpeedChanged -= ShowSpeedText;
         StaminaManager.OnStaminaChanged -= ShowStaminaText;
         MoneyManager.OnMoneyChanged -= ShowMoneyText;

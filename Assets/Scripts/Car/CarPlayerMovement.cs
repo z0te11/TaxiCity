@@ -1,9 +1,8 @@
 using System;
 using UnityEngine;
 
-public class CarPlayerMovement : MonoBehaviour, IMovementCar, ITransmission
+public class CarPlayerMovement : MonoBehaviour, IMovementCar
 {
-    public static Action<int> OnStageChanged;
     public static Action<float> OnSpeedChanged;
     
     [Header("Movement Settings")]
@@ -12,23 +11,13 @@ public class CarPlayerMovement : MonoBehaviour, IMovementCar, ITransmission
     [SerializeField] private float _acceleration = 1f;
     [SerializeField] private float _deceleration = 1f;
     [SerializeField] private float _rotationSpeed = 8f;
+    [SerializeField] private WheelsController _wheelsCtr;
 
     private Rigidbody _rb;
     private float _maxRotationSpeed;
-    private int _stage;
-    private int _maxStage = 5;
     private float _currentSpeed;
     private bool _canMove = true;
-
-    public int Stage
-    {
-        get { return _stage; }
-        set
-        {
-            if (value <= _maxStage && value > 0) _stage = value;
-            OnStageChanged?.Invoke(_stage);
-        }
-    }
+    private ITransmission _iTransmission;
 
     public float Speed
     {
@@ -48,12 +37,12 @@ public class CarPlayerMovement : MonoBehaviour, IMovementCar, ITransmission
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _iTransmission = GetComponent<ITransmission>();
     }
 
     private void Start()
     {
-        _maxRotationSpeed = _rotationSpeed;
-        Stage = 1;
+        _maxRotationSpeed = RotationSpeed;
     }
 
     public void CanPlayerMove(bool isCan)
@@ -71,7 +60,7 @@ public class CarPlayerMovement : MonoBehaviour, IMovementCar, ITransmission
     {
         if (verticalInput > 0 && _canMove)
         {
-            var newAccel = Utils.CalculateAcceleration(Stage, _acceleration, Speed);
+            var newAccel = Utils.CalculateAcceleration(_iTransmission.Stage, _acceleration, Speed);
             Speed = Mathf.Lerp(Speed, _maxSpeed, newAccel * Time.fixedDeltaTime);
         }
         else if (verticalInput < 0 && _canMove)
@@ -85,6 +74,7 @@ public class CarPlayerMovement : MonoBehaviour, IMovementCar, ITransmission
 
         Vector3 forwardMovement = transform.forward * Speed;
         _rb.velocity = new Vector3(forwardMovement.x, _rb.velocity.y, forwardMovement.z);
+        if (_wheelsCtr != null) _wheelsCtr.RotationForward(Speed);
     }
 
     public void MoveBack(float verticalInput)
@@ -99,16 +89,7 @@ public class CarPlayerMovement : MonoBehaviour, IMovementCar, ITransmission
             float rotation = horizontalInput * RotationSpeed * Time.fixedDeltaTime * Speed;
             transform.Rotate(0, rotation, 0);
         }
-    }
-
-    public void NextStage()
-    {
-        Stage++;
-    }
-
-    public void PreviousStage()
-    {
-        Stage--;
+        if (_wheelsCtr != null) _wheelsCtr.RotationTurn(horizontalInput);
     }
 
 }
