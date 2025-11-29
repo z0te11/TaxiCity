@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class WaySystem : MonoBehaviour
 {
@@ -11,18 +12,21 @@ public class WaySystem : MonoBehaviour
     private int _numberWay = 0;
     private List<int> _currentWayPos = new List<int>();
 
-    public static WaySystem instance;
+    private OrderSystem _orderSystem;
+    private BuildingSystem _buildingSystem;
 
-    private void Awake()
+    [Inject]
+    public void Construct(OrderSystem orderSystem, BuildingSystem buildingSystem)
     {
-        if (instance == null) instance = this;
+        _orderSystem = orderSystem;
+        _buildingSystem = buildingSystem;
     }
 
     public void CreateWayRoad(List<int> wayPos)
     {
         _numberWay = 0;
         _currentWayPos = wayPos;
-        Vector3 wayFirstPos = BuildingSystem.instance.GetPositionBuilding(_currentWayPos[_numberWay]);
+        Vector3 wayFirstPos = _buildingSystem.GetPositionBuilding(_currentWayPos[_numberWay]);
         CreateWayPoint(wayFirstPos, _startMaterial);
     }
 
@@ -31,6 +35,7 @@ public class WaySystem : MonoBehaviour
         var newWayPoint = Instantiate(_wayPoint, pos, Quaternion.identity);
         _arrow.SetTarget(newWayPoint.transform);
         var pointComp = newWayPoint.GetComponent<WayPoint>();
+        pointComp.Initialize(_orderSystem, this);
         pointComp.SetShader(newMaterial);
     }
 
@@ -39,7 +44,7 @@ public class WaySystem : MonoBehaviour
         _numberWay++;
         if (_numberWay >= _currentWayPos.Count)
         {
-            OrderSystem.instance.FinishOrder();
+            _orderSystem.FinishOrder();
             return;
         }
 
@@ -52,7 +57,7 @@ public class WaySystem : MonoBehaviour
         {
             newMaterial = _finishMaterial;
         }
-        CreateWayPoint(BuildingSystem.instance.GetPositionBuilding(_currentWayPos[_numberWay]), newMaterial);
+        CreateWayPoint(_buildingSystem.GetPositionBuilding(_currentWayPos[_numberWay]), newMaterial);
     }
 }
 

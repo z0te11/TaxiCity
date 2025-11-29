@@ -4,16 +4,8 @@ using UnityEngine;
 public class StaminaManager : MonoBehaviour
 {
     public static Action<float> OnStaminaChanged;
-    public static StaminaManager Instance = null;
     private float _staminaPLayer;
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-    }
     public float StaminaPlayer
     {
         get { return _staminaPLayer; }

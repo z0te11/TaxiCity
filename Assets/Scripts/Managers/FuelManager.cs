@@ -1,18 +1,10 @@
- using System;
+using System;
 using UnityEngine;
 public class FuelManager : MonoBehaviour
 {
     public static Action<float> OnFuelChanged;
-    public static FuelManager Instance = null;
     private float _fuelPLayer;
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-    }
     public float FuelPlayer
     {
         get { return _fuelPLayer; }

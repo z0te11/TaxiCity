@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class PlayerStamina : MonoBehaviour
 {
@@ -6,6 +7,14 @@ public class PlayerStamina : MonoBehaviour
     [SerializeField] private int _spendStForTick = 2;
     private float _currTime;
     private IMovementCar _moveCar;
+    private StaminaManager _staminaManager;
+
+    [Inject]
+    public void Construct(StaminaManager staminaManager)
+    {
+        _staminaManager = staminaManager;
+    }
+
     private void Start()
     {
         _moveCar = GetComponent<IMovementCar>();
@@ -31,6 +40,6 @@ public class PlayerStamina : MonoBehaviour
 
     private void SpendStamina()
     {
-        StaminaManager.Instance.RemoveStamina(_spendStForTick);
+        _staminaManager.RemoveStamina(_spendStForTick);
     }
 }

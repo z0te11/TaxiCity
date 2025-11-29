@@ -1,27 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SellPanel : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _sellButtons;
-    private ISell[] _iSellButtons;
+    [SerializeField] private SellButton[] _sellButtons;
 
-    private ISell[] GetSellInterfaces()
+    private MoneyManager _moneyManger;
+    private InventorySystem _inventorySystem;
+
+    public void Initialize(MoneyManager moneyManager, InventorySystem inventorySystem)
     {
-        List<ISell> sellInterfaces = new List<ISell>();
-        foreach (var obj in _sellButtons)
-        {
-            var sellComponent = obj.GetComponent<ISell>();
-            if (sellComponent != null)
-                sellInterfaces.Add(sellComponent);
-        }
-        return sellInterfaces.ToArray();
+        _moneyManger = moneyManager;
+        _inventorySystem = inventorySystem;
+        Debug.Log("Inhect " + this);
+        InitializeButtons();
     }
-    
-    private void Awake()
+
+    private void InitializeButtons()
     {
-        _iSellButtons = GetSellInterfaces();
+        for (int i = 0; i < _sellButtons.Length; i++)
+        {
+            _sellButtons[i].Initialize(_moneyManger, _inventorySystem);
+        }
     }
 
     public void ClosePanel()

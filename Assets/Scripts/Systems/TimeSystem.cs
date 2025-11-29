@@ -12,7 +12,6 @@ public class TimeSystem : MonoBehaviour
     [Header("Current Time")]
     public TimeData currentTime = new TimeData(2025, 0, 1, 6, 1);
     
-    // События
     public static Action<TimeData> OnMinuteChanged;
     public static Action<TimeData> OnHourChanged; 
     public static Action<TimeData> OnDayChanged;
@@ -21,11 +20,6 @@ public class TimeSystem : MonoBehaviour
     
     private float minuteTimer = 0f;
     private bool isPaused = false;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     private void Update()
     {
@@ -65,20 +59,13 @@ public class TimeSystem : MonoBehaviour
         }
         
         OnHourChanged?.Invoke(currentTime);
-        
-        // Проверяем смену времени суток
-        if ((oldHour < 6 && currentTime.hour >= 6) || 
-            (oldHour < 18 && currentTime.hour >= 18))
-        {
-            // Смена утра/дня/вечера/ночи
-        }
     }
     
     public void AddDay(int days)
     {
         currentTime.day += days;
         
-        while (currentTime.day > 30) // 30 дней в сезоне
+        while (currentTime.day > 30)
         {
             currentTime.day -= 30;
             AddSeason(1);
@@ -119,7 +106,6 @@ public class TimeSystem : MonoBehaviour
         OnHourChanged?.Invoke(currentTime);
     }
     
-    // Методы управления временем
     public void Pause() => isPaused = true;
     public void Resume() => isPaused = false;
     public void SetTimeScale(float scale) => timeScale = Mathf.Max(0, scale);

@@ -1,9 +1,17 @@
 using UnityEngine;
+using Zenject;
 
 public class FuelPoint : MonoBehaviour
 {
+    private FuelManager _fuelManager;
+    
+    [Inject]
+    private void Construct(FuelManager fuelManager)
+    {
+        _fuelManager = fuelManager;
+    }
     public void OnTriggerEnter(Collider other)
     {
-        FuelManager.Instance.AddFuel(50);
+        _fuelManager.AddFuel(50);
     }
 }

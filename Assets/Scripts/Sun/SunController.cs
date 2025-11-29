@@ -3,9 +3,6 @@ using UnityEngine;
 public class SunController : MonoBehaviour
 {
     [Header("Sun Settings")]
-    [SerializeField] private float sunriseHour = 6f;  
-    [SerializeField] private float sunsetHour = 18f;
-    [SerializeField] private float noonHour = 12f;
     
     [Header("Rotation Settings")]
     [SerializeField] private float startRotationX = -90f;

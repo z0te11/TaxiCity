@@ -40,7 +40,7 @@ public class RegenItem : MonoBehaviour, IItem
     {
         if (Amount <= 0) return;
         RemoveFromAmount(1);
-        StaminaManager.Instance.AddStamina(_regen);
+
     }
     public void ChangeAmount(int newAmount)
     {

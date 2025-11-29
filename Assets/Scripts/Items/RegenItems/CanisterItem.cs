@@ -1,12 +1,18 @@
-using UnityEngine;
-using UnityEngine.UI;
+using Zenject;
 
 public class CanisterItem : RegenItem
 {
+    private FuelManager _fuelManager;
+    
+    [Inject]
+    private void Construct(FuelManager fuelManager)
+    {
+        _fuelManager = fuelManager;
+    }
     public override void UseItem()
     {
         if (Amount <= 0) return;
         RemoveFromAmount(1);
-        FuelManager.Instance.AddFuel(_regen);
+        _fuelManager.AddFuel(_regen);
     }
 }
