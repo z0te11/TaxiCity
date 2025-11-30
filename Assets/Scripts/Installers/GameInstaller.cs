@@ -13,6 +13,7 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private OrderSystem _orderSystem;
     [SerializeField] private ShopSystem _shopSystem;
     [SerializeField] private BuildingSystem _buildingSystem;
+    [SerializeField] private TimeSystem _timeSystem;
 
 
     public override void InstallBindings()
@@ -27,5 +28,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<OrderSystem>().FromInstance(_orderSystem).AsSingle();
         Container.Bind<ShopSystem>().FromInstance(_shopSystem).AsSingle();
         Container.Bind<BuildingSystem>().FromInstance(_buildingSystem).AsSingle();
+        Container.Bind<TimeSystem>().FromInstance(_timeSystem).AsSingle();
     }
 }

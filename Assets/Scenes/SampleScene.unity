@@ -666,6 +666,35 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 247901507}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &251990063 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8206997125322310813, guid: 1086206bded751d48b0d75cb5f1cd4aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 8442204643854887088}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &251990065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251990063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &260174035
 GameObject:
   m_ObjectHideFlags: 0
@@ -3731,7 +3760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerData: {fileID: 11400000, guid: 9bed3652405ceaa45a33773855b6038c, type: 2}
-  _gameManager: {fileID: 0}
+  _gameManager: {fileID: 1502378202}
   _fuelManager: {fileID: 1502378203}
   _moneyManager: {fileID: 1502378201}
   _staminaManager: {fileID: 1502378200}
@@ -3740,6 +3769,7 @@ MonoBehaviour:
   _orderSystem: {fileID: 1273517148}
   _shopSystem: {fileID: 1273517151}
   _buildingSystem: {fileID: 1273517150}
+  _timeSystem: {fileID: 1273517152}
 --- !u!114 &1124647229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4122,7 +4152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212aa4e0ca8216741acd3cbbc810df48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 1
+  timeScale: 100
   realSecondsPerGameMinute: 2.5
 --- !u!114 &1273517153
 MonoBehaviour:
@@ -7570,7 +7600,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8206997125322310813, guid: 1086206bded751d48b0d75cb5f1cd4aa,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 251990065}
   m_SourcePrefab: {fileID: 100100000, guid: 1086206bded751d48b0d75cb5f1cd4aa, type: 3}
 --- !u!114 &8442204643854887089 stripped
 MonoBehaviour:

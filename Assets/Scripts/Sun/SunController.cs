@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class SunController : MonoBehaviour
 {
@@ -8,26 +9,33 @@ public class SunController : MonoBehaviour
     [SerializeField] private float startRotationX = -90f;
     [SerializeField] private float endRotationX = 270f;
 
+
     private Quaternion targetRotation;
     private float currentNormalizedTime;
+    private TimeSystem _timeSystem;
+
+    [Inject]
+    public void Construct(TimeSystem timeSystem)
+    {
+        _timeSystem = timeSystem;
+    }
 
     private void Update()
     {
-        if (TimeSystem.Instance != null)
-        {
-            UpdateSunRotation(TimeSystem.Instance.currentTime);
-        }   
+        if (_timeSystem == null) return;
+
+        UpdateSunRotation(_timeSystem.currentTime);
     }
 
     private void UpdateSunRotation(TimeData timeData)
     {
         currentNormalizedTime = CalculateNormalizedTime(timeData.hour, timeData.minute);
-        
+
         float sunAngle = CalculateSunAngle(currentNormalizedTime);
 
         targetRotation = Quaternion.Euler(sunAngle, 170f, 0f);
 
-        transform.rotation = targetRotation;
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
     }
 
     private float CalculateNormalizedTime(int hour, int minute)
