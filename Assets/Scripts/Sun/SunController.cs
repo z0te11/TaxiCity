@@ -8,7 +8,7 @@ public class SunController : MonoBehaviour
     [Header("Rotation Settings")]
     [SerializeField] private float startRotationX = -90f;
     [SerializeField] private float endRotationX = 270f;
-
+    [SerializeField] private Light _light;
 
     private Quaternion targetRotation;
     private float currentNormalizedTime;
@@ -34,6 +34,15 @@ public class SunController : MonoBehaviour
         float sunAngle = CalculateSunAngle(currentNormalizedTime);
 
         targetRotation = Quaternion.Euler(sunAngle, 170f, 0f);
+
+        if (sunAngle <= 10f || sunAngle >= 180f)
+        {
+        _light.enabled = false;
+        }
+        else
+        {
+        _light.enabled = true;
+        }
 
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
     }
