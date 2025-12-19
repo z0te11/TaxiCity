@@ -1,21 +1,24 @@
 using UnityEngine;
 using System;
+using Zenject;
 
 public class OrderSystem : MonoBehaviour
 {
     public static Action OnOrderFinished;
     public static Action OnOrderAccepted;
     [SerializeField] private Order[] _orders;
-    [SerializeField] private PhonePanel _phonePanel;
+    [SerializeField] private PhonePanelController _phonePanel;
     public Order currnetOrder;
     private Order _foundOrder;
-    public static OrderSystem instance;
+    private MoneyManager _moneyManager;
+    private WaySystem _waySystem;
 
-    private void Awake()
+    [Inject]
+    public void Construct(MoneyManager moneyManager, WaySystem waySystem)
     {
-        if (instance == null) instance = this;
+        _moneyManager = moneyManager;
+        _waySystem = waySystem;
     }
-
 
     public void FindNewOrder()
     {
@@ -26,13 +29,13 @@ public class OrderSystem : MonoBehaviour
     public void AcceptOrder()
     {
         currnetOrder = _foundOrder;
-        if (currnetOrder != null) WaySystem.instance.CreateWayRoad(currnetOrder.orderWay);
+        if (currnetOrder != null) _waySystem.CreateWayRoad(currnetOrder.orderWay);
         OnOrderAccepted?.Invoke();
     }
 
     public void FinishOrder()
     {
-        MoneyManager.Instance.AddMoney(currnetOrder.price);
+        _moneyManager.AddMoney(currnetOrder.price);
         OnOrderFinished?.Invoke();
         currnetOrder = null;
     }

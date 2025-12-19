@@ -1,9 +1,17 @@
 using UnityEngine;
+using Zenject;
 
 public class HomePoint : MonoBehaviour
 {
+    private StaminaManager _staminaManager;
+
+    [Inject]
+    public void Construct(StaminaManager staminaManager)
+    {
+        _staminaManager = staminaManager;
+    }
     public void OnTriggerEnter(Collider other)
     {
-        StaminaManager.Instance.AddStamina(50);
+        _staminaManager.AddStamina(50);
     }
 }

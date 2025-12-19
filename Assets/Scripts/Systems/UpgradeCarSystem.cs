@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class UpgradeCarSystem : MonoBehaviour
 {
-    public static UpgradeCarSystem Instance;
-
     [SerializeField] private PlayerUpgrade _playerUpgrade;
     private List<UpgradeType> _upgradeTypesUsed = new List<UpgradeType>();
-
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-    }
 
     public void UpgradeCarByType(UpgradeType upgrade)
     {

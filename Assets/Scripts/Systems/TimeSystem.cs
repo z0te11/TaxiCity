@@ -3,8 +3,6 @@ using System;
 
 public class TimeSystem : MonoBehaviour
 {
-    public static TimeSystem Instance { get; private set; }
-    
     [Header("Settings")]
     public float timeScale = 1f;
     public float realSecondsPerGameMinute = 2.5f;
@@ -12,7 +10,6 @@ public class TimeSystem : MonoBehaviour
     [Header("Current Time")]
     public TimeData currentTime = new TimeData(2025, 0, 1, 6, 1);
     
-    // События
     public static Action<TimeData> OnMinuteChanged;
     public static Action<TimeData> OnHourChanged; 
     public static Action<TimeData> OnDayChanged;
@@ -21,11 +18,6 @@ public class TimeSystem : MonoBehaviour
     
     private float minuteTimer = 0f;
     private bool isPaused = false;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     private void Update()
     {
@@ -44,9 +36,9 @@ public class TimeSystem : MonoBehaviour
     {
         currentTime.minute += minutes;
         
-        while (currentTime.minute >= 60)
+        if (currentTime.minute >= 60)
         {
-            currentTime.minute -= 60;
+            currentTime.minute = 0;
             AddHour(1);
         }
         
@@ -58,29 +50,22 @@ public class TimeSystem : MonoBehaviour
         int oldHour = currentTime.hour;
         currentTime.hour += hours;
         
-        while (currentTime.hour >= 24)
+        if (currentTime.hour >= 24)
         {
-            currentTime.hour -= 24;
+            currentTime.hour = 0;
             AddDay(1);
         }
         
         OnHourChanged?.Invoke(currentTime);
-        
-        // Проверяем смену времени суток
-        if ((oldHour < 6 && currentTime.hour >= 6) || 
-            (oldHour < 18 && currentTime.hour >= 18))
-        {
-            // Смена утра/дня/вечера/ночи
-        }
     }
     
     public void AddDay(int days)
     {
         currentTime.day += days;
         
-        while (currentTime.day > 30) // 30 дней в сезоне
+        if (currentTime.day > 30)
         {
-            currentTime.day -= 30;
+            currentTime.day = 0;
             AddSeason(1);
         }
         
@@ -91,9 +76,9 @@ public class TimeSystem : MonoBehaviour
     {
         currentTime.season += seasons;
         
-        while (currentTime.season >= 4)
+        if (currentTime.season >= 4)
         {
-            currentTime.season -= 4;
+            currentTime.season = 0;
             AddYear(1);
         }
         
@@ -119,7 +104,6 @@ public class TimeSystem : MonoBehaviour
         OnHourChanged?.Invoke(currentTime);
     }
     
-    // Методы управления временем
     public void Pause() => isPaused = true;
     public void Resume() => isPaused = false;
     public void SetTimeScale(float scale) => timeScale = Mathf.Max(0, scale);

@@ -3,6 +3,14 @@ using UnityEngine;
 public class WayPoint : MonoBehaviour
 {
     private Renderer _render;
+    private OrderSystem _orderSystem;
+    private WaySystem _waySystem;
+
+    public void Initialize(OrderSystem orderSystem, WaySystem waySystem)
+    {
+        _orderSystem = orderSystem;
+        _waySystem = waySystem;
+    }
 
     private void Awake()
     {
@@ -16,8 +24,8 @@ public class WayPoint : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (OrderSystem.instance.currnetOrder == null) return;
-        WaySystem.instance.NextWayRoad();
+        if (_orderSystem.currnetOrder == null) return;
+        _waySystem.NextWayRoad();
         DestroyPoint();
     }
     

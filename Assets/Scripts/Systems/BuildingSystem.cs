@@ -7,11 +7,8 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private GameObject _builds;
     private Building[] _buildings;
 
-    public static BuildingSystem instance;
-
     private void Awake()
     {
-        if (instance == null) instance = this;
         _buildings = _builds.GetComponentsInChildren<Building>();
     }
 

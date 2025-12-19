@@ -4,16 +4,7 @@ using UnityEngine;
 public class MoneyManager : MonoBehaviour
 {
     public static Action<int> OnMoneyChanged;
-    public static MoneyManager Instance = null;
     private int _moneyPlayer;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-    }
 
     public int MoneyPlayer
     {

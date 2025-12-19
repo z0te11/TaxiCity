@@ -1,11 +1,21 @@
 using UnityEngine;
+using Zenject;
 
 public class PlayerFuel : MonoBehaviour
 {
     [SerializeField] private float _tickTimeFuel;
     [SerializeField] private float _fuelСonsumption;
     [SerializeField] private CarPlayerMovement _carMove;
+
+    private FuelManager _fuelManager;
     private float _tickTime;
+    
+    [Inject]
+    private void Construct(FuelManager fuelManager)
+    {
+        _fuelManager = fuelManager;
+    }
+    
 
     private void Awake()
     {
@@ -28,7 +38,7 @@ public class PlayerFuel : MonoBehaviour
 
         if (_tickTime <= 0)
         {
-            FuelManager.Instance.SpendFuel(_carMove.Speed * _fuelСonsumption / 100);
+            _fuelManager.SpendFuel(_carMove.Speed * _fuelСonsumption / 100);
             _tickTime = _tickTimeFuel;
         }
         else

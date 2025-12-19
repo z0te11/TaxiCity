@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class OrderPanel : MonoBehaviour
 {
+    [Header("UI References")]
     [SerializeField] private Text _nameText;
     [SerializeField] private Text _descriptionText;
     [SerializeField] private Text _priceText;
@@ -10,6 +11,13 @@ public class OrderPanel : MonoBehaviour
     [SerializeField] private Text _startOrderText;
     [SerializeField] private Text _finishOrderText;
     [SerializeField] private GameObject _acceptButton;
+
+    private OrderSystem _orderSystem;
+
+    public void Initialize(OrderSystem orderSystem)
+    {
+        _orderSystem = orderSystem;
+    }
     
 
     public void SetTextOrder(Order newOrder)
@@ -36,7 +44,7 @@ public class OrderPanel : MonoBehaviour
 
     public void AcceptOrder()
     {
-        OrderSystem.instance.AcceptOrder();
+        _orderSystem.AcceptOrder();
         Destroy(_acceptButton);
     }
 }

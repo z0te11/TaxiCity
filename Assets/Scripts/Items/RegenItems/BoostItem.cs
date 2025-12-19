@@ -1,13 +1,19 @@
-using UnityEngine;
-using UnityEngine.UI;
+using Zenject;
 
 public class BoostItem : RegenItem
 {
+    private StaminaManager _staminaManager;
+
+    [Inject]
+    public void Construct(StaminaManager staminaManager)
+    {
+        _staminaManager = staminaManager;
+    }
     public override void UseItem()
     {
         if (Amount <= 0) return;
         RemoveFromAmount(1);
-        StaminaManager.Instance.AddStamina(_regen);
+        _staminaManager.AddStamina(_regen);
     }
 
 }

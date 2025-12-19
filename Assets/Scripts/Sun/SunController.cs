@@ -1,36 +1,50 @@
 using UnityEngine;
+using Zenject;
 
 public class SunController : MonoBehaviour
 {
     [Header("Sun Settings")]
-    [SerializeField] private float sunriseHour = 6f;  
-    [SerializeField] private float sunsetHour = 18f;
-    [SerializeField] private float noonHour = 12f;
     
     [Header("Rotation Settings")]
     [SerializeField] private float startRotationX = -90f;
     [SerializeField] private float endRotationX = 270f;
+    [SerializeField] private Light _light;
 
     private Quaternion targetRotation;
     private float currentNormalizedTime;
+    private TimeSystem _timeSystem;
+
+    [Inject]
+    public void Construct(TimeSystem timeSystem)
+    {
+        _timeSystem = timeSystem;
+    }
 
     private void Update()
     {
-        if (TimeSystem.Instance != null)
-        {
-            UpdateSunRotation(TimeSystem.Instance.currentTime);
-        }   
+        if (_timeSystem == null) return;
+
+        UpdateSunRotation(_timeSystem.currentTime);
     }
 
     private void UpdateSunRotation(TimeData timeData)
     {
         currentNormalizedTime = CalculateNormalizedTime(timeData.hour, timeData.minute);
-        
+
         float sunAngle = CalculateSunAngle(currentNormalizedTime);
 
         targetRotation = Quaternion.Euler(sunAngle, 170f, 0f);
 
-        transform.rotation = targetRotation;
+        if (sunAngle <= 10f || sunAngle >= 180f)
+        {
+        _light.enabled = false;
+        }
+        else
+        {
+        _light.enabled = true;
+        }
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
     }
 
     private float CalculateNormalizedTime(int hour, int minute)
