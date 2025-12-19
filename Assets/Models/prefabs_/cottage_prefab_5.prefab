@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &502706868246608269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3504070411409815146}
+  m_Layer: 0
+  m_Name: PositionTaxi
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3504070411409815146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502706868246608269}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 9.97}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 349940133327038468}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &239119379418124271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69,6 +100,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eab27a5b502d4df4c815405e25116520,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 3504070411409815146}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eab27a5b502d4df4c815405e25116520,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 8888163712402055514}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: eab27a5b502d4df4c815405e25116520,
         type: 3}
@@ -90,7 +125,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1520623386625523613}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eab27a5b502d4df4c815405e25116520,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6151043817289807304}
   m_SourcePrefab: {fileID: 100100000, guid: eab27a5b502d4df4c815405e25116520, type: 3}
 --- !u!4 &349940133327038468 stripped
 Transform:
@@ -98,6 +137,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 239119379418124271}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1121655924586197694 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eab27a5b502d4df4c815405e25116520,
+    type: 3}
+  m_PrefabInstance: {fileID: 239119379418124271}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-6151043817289807304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121655924586197694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574f4d79a42d41e488ab743913c2741c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberBuild: 5
+  _posToGetTaxi: {fileID: 3504070411409815146}
 --- !u!1001 &1337832510986016886
 PrefabInstance:
   m_ObjectHideFlags: 0

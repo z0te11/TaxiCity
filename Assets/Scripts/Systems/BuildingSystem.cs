@@ -17,7 +17,7 @@ public class BuildingSystem : MonoBehaviour
         for (int i = 0; i < _buildings.Length; i++)
         {
             int newNumber = _buildings[i].GetNumberBuild();
-            if (i == numberBuild) return _buildings[i].gameObject.transform.position;
+            if (i == numberBuild) return _buildings[i].GetPositionGetTaxi().position;
         }
         return Vector3.zero;
     }

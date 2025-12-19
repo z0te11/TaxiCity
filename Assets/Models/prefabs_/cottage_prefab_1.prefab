@@ -1367,6 +1367,37 @@ Transform:
   - {fileID: 6491621134643034160}
   m_Father: {fileID: 8695505962298242950}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7473951684294351553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2366078069455881693}
+  m_Layer: 0
+  m_Name: PositionTaxi
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2366078069455881693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473951684294351553}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10.06}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8695505962298242950}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8351771811467472188
 GameObject:
   m_ObjectHideFlags: 0
@@ -1378,6 +1409,7 @@ GameObject:
   - component: {fileID: 8695505962298242950}
   - component: {fileID: 5693534057923409955}
   - component: {fileID: 7559160336831220969}
+  - component: {fileID: -990080818128786123}
   m_Layer: 0
   m_Name: cottage_prefab_1
   m_TagString: Untagged
@@ -1403,6 +1435,7 @@ Transform:
   - {fileID: 1805619181380933055}
   - {fileID: 3784614570264066731}
   - {fileID: 447497016571314816}
+  - {fileID: 2366078069455881693}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5693534057923409955
@@ -1455,6 +1488,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-990080818128786123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8351771811467472188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574f4d79a42d41e488ab743913c2741c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberBuild: 1
+  _posToGetTaxi: {fileID: 2366078069455881693}
 --- !u!1 &8491366400352386345
 GameObject:
   m_ObjectHideFlags: 0
